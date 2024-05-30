@@ -1,0 +1,8 @@
+use javalab-db
+
+db.users
+    .insertOne(
+{
+    "firstName": "Ilya",
+    "lastName": "Ivlev"
+})

@@ -1,0 +1,4 @@
+mongo:
+  database:
+    name: javalab-db
+    uri: mongodb://localhost:27017
