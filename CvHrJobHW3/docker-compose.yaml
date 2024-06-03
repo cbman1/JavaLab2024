@@ -1,0 +1,49 @@
+services:
+  HRService:
+    image: HRService:latest
+    container_name: HRService
+    depends_on:
+      - CvService
+      - JobService
+    ports:
+      - "8080:8080"
+    environment:
+      - CV_SERVICE_HOST=CvService
+      - JOB_SERVICE_HOST=JobService
+    networks:
+      - net
+  CvService:
+    image: CvService:latest
+    depends_on:
+      - mongo
+    container_name: CvService
+    ports:
+      - "5001:5001"
+    environment:
+      - CONFIG_PATH=./configs/config.yml
+    networks:
+      - net
+  JobService:
+    image: JobService:latest
+    depends_on:
+      - mongo
+    container_name: JobService
+    ports:
+      - "5000:5000"
+    environment:
+      - CONFIG_PATH=./configs/config.yml
+    networks:
+      - net
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "/var/lib/mongodb:/data/db"
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge

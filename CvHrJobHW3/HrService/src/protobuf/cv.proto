@@ -1,0 +1,26 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_generic_services = true;
+
+service CVService {
+  rpc GetAll(GetAllRequest) returns (GetAllResponse);
+}
+
+message CVResponse {
+  string firstName = 1;
+  string lastName = 2;
+  string profession = 3;
+  string city = 4;
+  int32 experience = 5;
+  repeated string stack = 6;
+  repeated string links = 7;
+  repeated string companies = 8;
+}
+
+message GetAllRequest {}
+
+message GetAllResponse {
+  repeated CVResponse cvs = 1;
+}
+
+
